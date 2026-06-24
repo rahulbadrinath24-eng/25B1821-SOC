@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+struct posn{
+  ll posn1 = -1;
+  ll posn2 = -1;
+};
+ll minsum(posn a[], ll b, ll c){
+  return min( abs(a[b].posn1-a[c].posn1) + abs(a[b].posn2-a[c].posn2) , abs(a[b].posn1-a[c].posn2) + abs(a[b].posn2-a[c].posn1));
+}
+int main(){
+  ll n,x;
+  cin>>n;
+  struct posn arr[n+1];
+  for(ll i=1;i<=2*n;i++){
+    cin>>x;
+    if(arr[x].posn1 == -1) arr[x].posn1 = i;
+    else arr[x].posn2 = i;
+  }
+  arr[0].posn1 = arr[0].posn2 = 1;
+  x=0;
+  for(ll i=0; i<n; i++){
+    x += minsum(arr, i, i+1);
+  }
+  cout<<x;
+  return 0;
+}
